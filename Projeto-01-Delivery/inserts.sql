@@ -1,0 +1,12 @@
+INSERT INTO estado (descricao, sigla) VALUES('Rio de Janeiro', 'RJ'),('São Paulo', 'SP');
+INSERT INTO tipoproduto (descricao) VALUES('Lanche'),('Bebida'),('Sobremesa');
+INSERT INTO statusPedido (descricao) VALUES('Pendente'),('Em preparo'),('Saiu para entrega'),('Entregue');
+INSERT INTO usuario (email, senha) VALUES('joao@email.com', '123456'),('maria@email.com', '123456'),('admin@restaurante.com', 'admin123');
+INSERT INTO cidade (estado_id, descricao) VALUES(1, 'Rio de Janeiro'),(2, 'São Paulo');
+INSERT INTO cliente (cidade_id, usuario_id, nome, telefone, dataNascimento, genero) VALUES(1, 1, 'João Silva', '21999999999', '1995-05-10', 'Masculino'),(2, 2, 'Maria Souza', '11988888888', '1998-08-20', 'Feminino');
+INSERT INTO restaurante (cidade_id, razaoSocial, nomeFantasia, telefone, endereco) VALUES(1, 'Burger RJ LTDA', 'Burger Top', '2133333333', 'Rua A, 100'),(2, 'Pizza SP LTDA', 'Pizza Show', '1133333333', 'Av Paulista, 500');
+INSERT INTO endereco (cliente_id, rua, numeroImovel, complemento, bairro, cep, pontoReferencia) VALUES(1, 'Rua B', '200', 'Apto 101', 'Centro', '20000000', 'Próximo ao mercado'),(2, 'Rua C', '300', NULL, 'Zona Sul', '01000000', 'Perto da praça');
+INSERT INTO entregador (cidade_id, cnh, nome, endereco, telefone) VALUES(1, '123456789', 'Carlos Motoboy', 'Rua D, 50', '21977777777'),(2, '987654321', 'Pedro Entregador', 'Rua E, 80', '11966666666');
+INSERT INTO produto (tipoproduto_id, descricao, valorUnitario, estoque, tipo) VALUES(1, 'Hamburguer', 25.00, 50, 'Comida'),(2, 'Refrigerante', 8.00, 100, 'Bebida'),(3, 'Sorvete', 12.00, 30, 'Sobremesa');
+INSERT INTO pedido (statusPedido_id, entregador_id, restaurante_id, cliente_id, endereco_id, dataPedido, valorPedido) VALUES(4, 1, 1, 1, 1, '2026-04-03', 33.00),(2, 2, 2, 2, 2, '2026-04-03', 20.00);
+INSERT INTO pedidoproduto (produto_id, pedido_id, quantidadeProduto, valorUnitario, desconto) VALUES(1, 1, 1, 25.00, 0),(2, 1, 1, 8.00, 0),(3, 2, 1, 12.00, 0);
