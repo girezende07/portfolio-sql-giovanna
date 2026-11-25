@@ -17,14 +17,8 @@ Este repositório reúne projetos acadêmicos desenvolvidos durante minha forma�
 - Criação de tabelas e relacionamentos.
 - Consultas e organização de informações.
 
-## Tecnologias e conhecimentos
+<img width="3646" height="2268" alt="image" src="https://github.com/user-attachments/assets/ea9df8fa-eead-4076-8eac-09a1feafa59d" />
 
-- SQL
-- Banco de Dados Relacionais
-- Modelagem de Dados
-- SELECT, WHERE e INNER JOIN
-- GROUP BY e ORDER BY
-- COUNT e SUM
 
 ## Objetivo
 
