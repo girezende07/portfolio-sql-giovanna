@@ -20,8 +20,6 @@ Este repositório reúne projetos acadêmicos desenvolvidos durante minha forma�
 <img width="3646" height="2268" alt="image" src="https://github.com/user-attachments/assets/ea9df8fa-eead-4076-8eac-09a1feafa59d" />
 
 
-## Objetivo
-
-Compartilhar minha evolução acadêmica e prática em Ciência de Dados e desenvolver minhas habilidades na área de Tecnologia.
+<img width="4032" height="586" alt="image" src="https://github.com/user-attachments/assets/2107871a-7a38-481b-aa3b-d58cd4cd8ead" />
 
 
