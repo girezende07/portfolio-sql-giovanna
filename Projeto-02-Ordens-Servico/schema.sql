@@ -2,53 +2,83 @@ CREATE DATABASE empresa;
 USE empresa;
 
 CREATE TABLE cliente (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(150) NOT NULL,
-    telefone VARCHAR(20),
-    endereco VARCHAR(150),
-    PRIMARY KEY (id)
+  IdCliente int NOT NULL AUTO_INCREMENT,
+  Nome varchar(50) DEFAULT NULL,
+  Telefone varchar(20) DEFAULT NULL,
+  Email varchar(50) DEFAULT NULL,
+  Endereco varchar(100) DEFAULT NULL,
+  DataCadastro date DEFAULT NULL,
+  PRIMARY KEY (IdCliente)
 );
 
 CREATE TABLE tecnico (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(150) NOT NULL,
-    especialidade VARCHAR(100),
-    telefone VARCHAR(20),
-    PRIMARY KEY (id)
+  IdTecnico int NOT NULL AUTO_INCREMENT,
+  Nome varchar(50) NOT NULL,
+  Telefone varchar(20) DEFAULT NULL,
+  Email varchar(50) DEFAULT NULL,
+  Endereco varchar(100) DEFAULT NULL,
+  Especialidade varchar(50) DEFAULT NULL,
+  DataAdmissao date DEFAULT NULL,
+  PRIMARY KEY (IdTecnico)
 );
 
 CREATE TABLE servico (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    descricao VARCHAR(150) NOT NULL,
-    valor DECIMAL(10,2),
-    PRIMARY KEY (id)
+  IdServico int NOT NULL AUTO_INCREMENT,
+  Descricao varchar(100) NOT NULL,
+  ValorPadrao decimal(7,2) DEFAULT NULL,
+  TempoEstimado time DEFAULT NULL,
+  PRIMARY KEY (IdServico)
 );
 
 CREATE TABLE ordemservico (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    cliente_id INT UNSIGNED NOT NULL,
-    tecnico_id INT UNSIGNED NOT NULL,
-    dataAbertura DATE,
-    status VARCHAR(30),
-    PRIMARY KEY (id),
-    FOREIGN KEY (cliente_id) REFERENCES cliente(id),
-    FOREIGN KEY (tecnico_id) REFERENCES tecnico(id)
-);
-
-CREATE TABLE ordemservico_servico (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    ordemservico_id INT UNSIGNED NOT NULL,
-    servico_id INT UNSIGNED NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (ordemservico_id) REFERENCES ordemservico(id),
-    FOREIGN KEY (servico_id) REFERENCES servico(id)
+  IdOrdemServico int NOT NULL AUTO_INCREMENT,
+  DataAbertura datetime NOT NULL,
+  Equipamento varchar(50) DEFAULT NULL,
+  Problema varchar(100) DEFAULT NULL,
+  Observacao varchar(200) DEFAULT NULL,
+  Prioridade enum('Baixa','Média','Alta') DEFAULT NULL,
+  Estado enum('Aberta','Em execução','Concluída') DEFAULT NULL,
+  IdCliente int DEFAULT NULL,
+  IdTecnico int DEFAULT NULL,
+  IdFinalizacao int DEFAULT NULL,
+  PRIMARY KEY (IdOrdemServico),
+  KEY IdTecnico (IdTecnico),
+  KEY IdCliente (IdCliente),
+  CONSTRAINT ordemservico_ibfk_1
+    FOREIGN KEY (IdTecnico)
+    REFERENCES tecnico (IdTecnico),
+  CONSTRAINT ordemservico_ibfk_2
+    FOREIGN KEY (IdCliente)
+    REFERENCES cliente (IdCliente)
 );
 
 CREATE TABLE finalizacao (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    ordemservico_id INT UNSIGNED NOT NULL,
-    dataFinalizacao DATE,
-    observacao VARCHAR(255),
-    PRIMARY KEY (id),
-    FOREIGN KEY (ordemservico_id) REFERENCES ordemservico(id)
+  IdFinalizacao int NOT NULL AUTO_INCREMENT,
+  IdOrdemServico int DEFAULT NULL,
+  DataFinalizacao datetime DEFAULT NULL,
+  DataEntrega date DEFAULT NULL,
+  ValorTotal decimal(7,2) DEFAULT NULL,
+  FormaPagamento enum('Dinheiro','Cartão','Pix') DEFAULT NULL,
+  GarantiaDias int DEFAULT NULL,
+  Observacao varchar(200) DEFAULT NULL,
+  PRIMARY KEY (IdFinalizacao),
+  KEY IdOrdemServico (IdOrdemServico),
+  CONSTRAINT finalizacao_ibfk_1
+    FOREIGN KEY (IdOrdemServico)
+    REFERENCES ordemservico (IdOrdemServico)
+);
+
+CREATE TABLE ordemservico_servico (
+  IdOrdemServico int NOT NULL,
+  IdServico int NOT NULL,
+  Quantidade int DEFAULT NULL,
+  ValorUnitário decimal(7,2) DEFAULT NULL,
+  PRIMARY KEY (IdOrdemServico, IdServico),
+  KEY IdServico (IdServico),
+  CONSTRAINT ordemservico_servico_ibfk_1
+    FOREIGN KEY (IdOrdemServico)
+    REFERENCES ordemservico (IdOrdemServico),
+  CONSTRAINT ordemservico_servico_ibfk_2
+    FOREIGN KEY (IdServico)
+    REFERENCES servico (IdServico)
 );
